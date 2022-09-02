@@ -23,5 +23,21 @@ packer.init {
 
 packer.startup(function(use)
   use 'wbthomason/packer.nvim'
-  use {'dracula/vim', as = 'dracula'}
+  use { 'dracula/vim', as = 'dracula' }
+  use {
+    "neovim/nvim-lspconfig",
+    "williamboman/mason.nvim",
+    "williamboman/mason-lspconfig.nvim",
+  }
+  use {
+    'hrsh7th/nvim-cmp',
+    'hrsh7th/cmp-nvim-lsp',
+    'hrsh7th/cmp-buffer',
+  }
+  use 'L3MON4D3/LuaSnip'
+  use {
+    'nvim-treesitter/nvim-treesitter',
+    run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
+  }
+
 end)
