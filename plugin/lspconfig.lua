@@ -48,15 +48,35 @@ vim.diagnostic.config({
   update_in_insert = true,
 })
 
-require('lspconfig')['tsserver'].setup {
-  on_attach = on_attach,
-  flags = lsp_flags,
-  capabilities = capabilities
-}
+local status_lspi, lsp_installer = pcall(require, "mason-lspconfig")
+if (not status_lspi) then return end
+
+local status_lspc, lspconfig = pcall(require, "lspconfig")
+if (not status_lspc) then return end
+
+-- 1. Set up nvim-lsp-installer first!
+-- lsp_installer.setup {}
+
+-- 2. (optional) Override the default configuration to be applied to all servers.
+lspconfig.util.default_config = vim.tbl_extend(
+  "force",
+  lspconfig.util.default_config,
+  {
+    on_attach = on_attach,
+    flags = lsp_flags,
+    capabilities = capabilities
+  }
+)
+
+-- 3. Loop through all of the installed servers and set it up via lspconfig
+for _, server in ipairs(lsp_installer.get_installed_servers()) do
+  lspconfig[server].setup {}
+end
 
 require('lspconfig')['sumneko_lua'].setup {
   on_attach = on_attach,
   flags = lsp_flags,
+  capabilities = capabilities,
   -- Server-specific settings...
   settings = {
     Lua = {
