@@ -1,7 +1,8 @@
-local status, mason = pcall(require, "mason")
-if (not status) then return end
-local status2, lspconfig = pcall(require, "mason-lspconfig")
-if (not status2) then return end
+local status_mason, mason = pcall(require, "mason")
+if (not status_mason) then return end
+
+local status_masonlspc, lspconfig = pcall(require, "mason-lspconfig")
+if (not status_masonlspc) then return end
 
 mason.setup({
   ui = {
