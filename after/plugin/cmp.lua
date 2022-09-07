@@ -4,15 +4,10 @@ if (not status_cmp) then return end
 local status_lsnip, luasnip = pcall(require, "luasnip")
 if (not status_lsnip) then return end
 
-local status_fsnip, _ = pcall(require, "luasnip.loaders.from_vscode")
-if (not status_fsnip) then return end
-
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
   return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match("%s") == nil
 end
-
-require('luasnip.loaders.from_vscode').lazy_load()
 
 cmp.setup({
   snippet = {
@@ -55,10 +50,9 @@ cmp.setup({
     end, { "i", "s" }),
   }),
   sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'buffer' },
     { name = 'path' },
-    { name = 'nvim_lsp', keyword_length = 3 },
-    { name = 'buffer', keyword_length = 3 },
-    { name = 'luasnip', keyword_length = 2 },
   }),
 })
 

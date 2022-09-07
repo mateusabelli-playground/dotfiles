@@ -35,13 +35,10 @@ packer.startup(function(use)
     'hrsh7th/cmp-buffer',
     'hrsh7th/cmp-path',
   }
-  use {
-    'L3MON4D3/LuaSnip',
-    'saadparwaiz1/cmp_luasnip',
-    'rafamadriz/friendly-snippets',
-  }
+  use 'L3MON4D3/LuaSnip'
   use {
     'nvim-treesitter/nvim-treesitter',
     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
   }
+
 end)
