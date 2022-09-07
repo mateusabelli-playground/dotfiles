@@ -1,7 +1,8 @@
-local status, cmp = pcall(require, "cmp")
-if (not status) then return end
-local status2, luasnip = pcall(require, "luasnip")
-if (not status2) then return end
+local status_cmp, cmp = pcall(require, "cmp")
+if (not status_cmp) then return end
+
+local status_lsnip, luasnip = pcall(require, "luasnip")
+if (not status_lsnip) then return end
 
 local has_words_before = function()
   local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -12,7 +13,7 @@ cmp.setup({
   snippet = {
     -- REQUIRED - you must specify a snippet engine
     expand = function(args)
-      require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      luasnip.lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
   window = {
@@ -51,8 +52,8 @@ cmp.setup({
   sources = cmp.config.sources({
     { name = 'nvim_lsp' },
     { name = 'buffer' },
-    -- { name = 'luasnip' }, -- For luasnip users.
-  })
+    { name = 'path' },
+  }),
 })
 
 -- Set configuration for specific filetype.
