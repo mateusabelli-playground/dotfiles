@@ -57,29 +57,24 @@ require('lazy').setup({
     },
 
     -- Useful plugin to show you pending keybinds.
-    { 'folke/which-key.nvim',                opts = {} },
+    { 'folke/which-key.nvim',     opts = {} },
 
     -- Adds git releated signs to the gutter, as well as utilities for managing changes
     { 'lewis6991/gitsigns.nvim' },
 
     -- Colorschemes
-    { 'projekt0n/github-nvim-theme',         version = 'v0.0.7' },
-    { "catppuccin/nvim",                     name = "catppuccin" },
+    { "ellisonleao/gruvbox.nvim", priority = 1000, config = true },
 
     -- Set lualine as statusline
     { 'nvim-lualine/lualine.nvim' },
 
-    -- Add indentation guides even on blank lines
-    { "lukas-reineke/indent-blankline.nvim", main = "ibl",       opts = {} },
-
     -- "gc" to comment visual regions/lines
-    { 'numToStr/Comment.nvim',               opts = {} },
+    { 'numToStr/Comment.nvim',    opts = {} },
 
     -- Zen mode
-    { 'folke/zen-mode.nvim',                 opts = {} },
+    { 'folke/zen-mode.nvim',      opts = {} },
 
     -- Fuzzy Finder (files, lsp, etc)
-    --
     {
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
@@ -109,4 +104,7 @@ require('lazy').setup({
         },
         build = ':TSUpdate',
     },
+
+    -- GitHub Copilot
+    -- { 'github/copilot.vim' }
 }, {})
