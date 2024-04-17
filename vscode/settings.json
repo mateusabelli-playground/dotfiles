@@ -1,0 +1,50 @@
+{
+  "window.zoomLevel": 0.25,
+  "editor.tabSize": 2,
+  "editor.fontFamily": "JetBrainsMono Nerd Font, FiraCode NF, Consolas, 'Courier New', monospace",
+  "editor.lineNumbers": "relative",
+  "editor.cursorSurroundingLines": 10,
+  "editor.formatOnSaveMode": "modifications",
+  "workbench.colorTheme": "GitHub Dark",
+  "workbench.iconTheme": "material-icon-theme",
+  "telemetry.telemetryLevel": "off",
+  "remote.SSH.remotePlatform": {
+    "192.168.0.150": "linux"
+  },
+  "vim.highlightedyank.enable": true,
+  "vim.handleKeys": {
+    "<C-d>": true,
+    "<C-k>": false,
+    "<C-b>": false,
+    "<C-f>": false
+  },
+  "vim.normalModeKeyBindingsNonRecursive": [
+    {
+      "before": ["[", "d"],
+      "commands": ["editor.action.marker.next"],
+      "silent": true
+    },
+    {
+      "before": ["]", "d"],
+      "commands": ["editor.action.marker.prev"],
+      "silent": true
+    },
+    {
+      "before": ["[", "c"],
+      "commands": ["editor.action.dirtydiff.next"],
+      "silent": true
+    },
+    {
+      "before": ["]", "c"],
+      "commands": ["editor.action.dirtydiff.previous"],
+      "silent": true
+    },
+    {
+      "before": ["K"],
+      "commands": ["editor.action.showHover"],
+      "silent": true
+    },
+    { "before": ["j"], "after": ["g", "j"], "silent": true },
+    { "before": ["k"], "after": ["g", "k"], "silent": true }
+  ]
+}
