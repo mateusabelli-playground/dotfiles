@@ -1,9 +1,4 @@
 -- Options
-vim.opt.termguicolors = true
-vim.cmd("colorscheme default")
-vim.cmd("hi StatusLine gui=None")
-vim.cmd("hi Pmenu guibg=gray15")
-
 vim.opt.tabstop = 4
 vim.opt.shiftwidth = 4
 vim.opt.softtabstop = 4
@@ -67,6 +62,9 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugins
 require('lazy').setup({
   {
+    'tpope/vim-sleuth'
+  },
+  {
     'neovim/nvim-lspconfig',
     config = function()
       vim.api.nvim_create_autocmd('LspAttach', {
@@ -74,10 +72,6 @@ require('lazy').setup({
         callback = function(ev)
           -- Enable completion triggered by <c-x><c-o>
           vim.bo[ev.buf].omnifunc = 'v:lua.vim.lsp.omnifunc'
-
-          -- Disable semantic tokens highlight
-          local client = vim.lsp.get_client_by_id(ev.data.client_id)
-          client.server_capabilities.semanticTokensProvider = nil
 
           -- Buffer local mappings.
           local opts = { buffer = ev.buf }
@@ -104,7 +98,45 @@ require('lazy').setup({
       -- Setup language servers.
       local lspconfig = require('lspconfig')
       lspconfig.tsserver.setup {}
+      lspconfig.gopls.setup {}
     end
+  },
+  {
+    "nvim-treesitter/nvim-treesitter",
+    build = ":TSUpdate",
+    config = function () 
+      local configs = require("nvim-treesitter.configs")
+
+      configs.setup({
+        ensure_installed = {"lua", "javascript", "typescript", "go"},
+        sync_install = false,
+        highlight = { enable = true },
+        indent = { enable = true },
+      })
+    end
+  },
+  {
+    'projekt0n/github-nvim-theme',
+    lazy = false,
+    priority = 1000,
+    config = function()
+      require('github-theme').setup({
+        options = {
+          transparent = true
+        },
+        groups = {
+          all = {
+            StatusLine = { bg = 'bg1', fg = 'fg1' },
+          }
+        }
+      })
+
+      vim.cmd('colorscheme github_dark')
+    end,
+  },
+  {
+    "j-hui/fidget.nvim",
+    opts = {}
   }
 })
 
